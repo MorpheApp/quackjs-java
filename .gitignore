@@ -3,3 +3,4 @@
 build/
 local.properties
 __pycache__/
+node_modules/
