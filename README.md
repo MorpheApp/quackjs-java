@@ -1,22 +1,30 @@
-# QuackJS
+# QuackJS Java
 
-Kotlin-only YouTube player signature deciphering and `n` transforms. Common
-Kotlin and stdlib only: no QuickJS, JNI, WebView, network client, or JS engine.
-Source: [MetrolistGroup/quackjs](https://github.com/MetrolistGroup/quackjs).
+Java-only YouTube player signature deciphering and `n` transforms for Android (min SDK 26):
+no QuickJS, JNI, WebView, network client, or JS engine.
+Original source: [MetrolistGroup/quackjs](https://github.com/MetrolistGroup/quackjs).
 
 ## Install with JitPack
 
 ```kotlin
-// settings.gradle.kts, alongside your existing repositories:
+// settings.gradle.kts, alongside your existing repositories (PAT required):
 dependencyResolutionManagement {
-    repositories { maven("https://jitpack.io") }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+            credentials {
+                username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR"))
+                password = providers.gradleProperty("gpr.key").getOrElse(System.getenv("GITHUB_TOKEN"))
+            }
+        }
+    }
 }
 // KMP commonMain dependencies:
-implementation("com.github.MetrolistGroup.quackjs:quackjs:0.1.4")
+implementation("app.morphe:quackjs-java:0.1.4")
 ```
 
-Targets: Android (min SDK 23), JVM (Java 17), Linux x64, iOS arm64 and iOS simulator
-arm64. See [InnerTubeX migration](docs/integration.md) for consumer guidance.
+Targets: Android (min SDK 26).
 
 ## Use
 
@@ -53,7 +61,5 @@ Node goldens and a **200/200 full-source QuickJS cross-check** (historical basel
 manual. See verification for exact counts, limits and rerun commands. This does
 not cover every historical/future player. Live playback, Android hardware and
 Apple execution/final linking are unverified.
-See [verification](docs/verification.md), [measured benchmarks](docs/benchmark.md),
-[architecture](DESIGN.md) and [fixture provenance](fixtures/manifest.json).
 
 Licensed under [GPL-3.0-only](LICENSE); retain [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -1,3 +1,18 @@
-pluginManagement { repositories { gradlePluginPortal(); mavenCentral(); google() } }
-dependencyResolutionManagement { repositories { mavenCentral(); google() } }
-rootProject.name = "quackjs"
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "quackjs-java"
+include(":core")
