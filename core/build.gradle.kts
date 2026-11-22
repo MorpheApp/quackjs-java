@@ -18,11 +18,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    sourceSets {
-        named("main")  { java { srcDirs("src/main/kotlin") } }
-        named("debug") { java { srcDirs("src/debug/kotlin") } }
-    }
-
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -30,10 +25,8 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
+dependencies {
+    compileOnly("androidx.annotation:annotation-jvm:1.9.1")
 }
 
 publishing {
